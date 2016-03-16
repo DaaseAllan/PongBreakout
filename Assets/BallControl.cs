@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class BallControl : MonoBehaviour {
-	
+	public GameObject Orange;
+	public GameObject Blue;
 	// Use this for initialization
 	void Start () {
 		StartCoroutine (hi (2.0f));
@@ -56,9 +57,24 @@ public class BallControl : MonoBehaviour {
 
 			print ("fuck");
 
-		}
+			if (coll.collider.name == ("Player1"))
+				{
+					Orange.SetActive(true);
+					Blue.SetActive(false);
+				}
+		
+				if (coll.collider.name == ("Player2"))
+				{
+					Orange.SetActive(false);
+					Blue.SetActive(true);
+				}
+
+				}
+
+
+				}
 	}
-}
+
 
 
 	// Update is called once per frame
