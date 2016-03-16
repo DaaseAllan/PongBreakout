@@ -4,6 +4,7 @@ using System.Collections;
 public class BallControl : MonoBehaviour {
 	public GameObject Orange;
 	public GameObject Blue;
+	public GameObject Boom;
 	// Use this for initialization
 	void Start () {
 		StartCoroutine (hi (2.0f));
@@ -56,6 +57,11 @@ public class BallControl : MonoBehaviour {
 			GetComponent<Rigidbody2D>().velocity += velY*Vector2.up;
 
 			print ("fuck");
+
+			GameObject exp = Instantiate (Boom) as GameObject;
+
+			exp.transform.position = transform.position;
+
 
 			if (coll.collider.name == ("Player1"))
 				{
