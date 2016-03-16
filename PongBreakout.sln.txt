@@ -1,0 +1,29 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{EF9E1A2E-FBDD-D785-7769-2A9EE8848342}") = "PongBreakout", "Assembly-CSharp.csproj", "{9B0062D4-B99B-4CEA-BE61-AE579090E25E}"
+EndProject
+Project("{EF9E1A2E-FBDD-D785-7769-2A9EE8848342}") = "PongBreakout", "Assembly-CSharp-Editor.csproj", "{D82DFB67-7B96-BDB1-7B9F-472882950542}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9B0062D4-B99B-4CEA-BE61-AE579090E25E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B0062D4-B99B-4CEA-BE61-AE579090E25E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B0062D4-B99B-4CEA-BE61-AE579090E25E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B0062D4-B99B-4CEA-BE61-AE579090E25E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D82DFB67-7B96-BDB1-7B9F-472882950542}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D82DFB67-7B96-BDB1-7B9F-472882950542}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D82DFB67-7B96-BDB1-7B9F-472882950542}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D82DFB67-7B96-BDB1-7B9F-472882950542}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
