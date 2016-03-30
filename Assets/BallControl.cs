@@ -18,6 +18,11 @@ public class BallControl : MonoBehaviour {
 		GoBall ();
 	}
 
+	void Update()
+	{
+		print (GetComponent<Rigidbody2D> ().velocity.magnitude);
+	}
+
 	public void GoBall(){
 
 		Orange.SetActive(true);
