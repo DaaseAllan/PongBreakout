@@ -6,6 +6,7 @@ public class BallControl : MonoBehaviour {
 	public GameObject Blue;
 	public GameObject BoomOrange;
 	public GameObject BoomBlue;
+	public GameObject Electric;
 	// Use this for initialization
 	void Start () {
 		StartCoroutine (hi (2.0f));
@@ -18,6 +19,10 @@ public class BallControl : MonoBehaviour {
 	}
 
 	public void GoBall(){
+
+		Orange.SetActive(true);
+		Blue.SetActive(true);
+
 		float rand = Random.Range (0.0f, 100.0f);
 		if (rand < 50.0f) {
 			GetComponent<Rigidbody2D>().AddForce (new Vector2 (20.0f, Random.Range(-15.0f,15.0f)));
@@ -27,6 +32,8 @@ public class BallControl : MonoBehaviour {
 	}
 
 	void hasWon(){
+
+
 		var vel = GetComponent<Rigidbody2D>().velocity;
 			vel.y = 0;
 			vel.x = 0;
@@ -36,6 +43,10 @@ public class BallControl : MonoBehaviour {
 	}
 
 	public void resetBall(){
+		//HVID STREG MAND!
+		Orange.SetActive(false);
+		Blue.SetActive(false);
+
 		var vel = GetComponent<Rigidbody2D>().velocity;
 		vel.y = 0;
 		vel.x = 0;
@@ -43,10 +54,14 @@ public class BallControl : MonoBehaviour {
 
 		gameObject.transform.position = new Vector2 (0, 0);
 
+		GameObject exp2 = Instantiate (Electric) as GameObject;
+
+		exp2.transform.position = transform.position;
+
+
 		StartCoroutine (hi (2.0f));hi (0.5f);
 
-		Orange.SetActive(true);
-		Blue.SetActive(true);
+
 
 	}
 
