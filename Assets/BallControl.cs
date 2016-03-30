@@ -4,7 +4,8 @@ using System.Collections;
 public class BallControl : MonoBehaviour {
 	public GameObject Orange;
 	public GameObject Blue;
-	public GameObject Boom;
+	public GameObject BoomOrange;
+	public GameObject BoomBlue;
 	// Use this for initialization
 	void Start () {
 		StartCoroutine (hi (2.0f));
@@ -44,6 +45,9 @@ public class BallControl : MonoBehaviour {
 
 		StartCoroutine (hi (2.0f));hi (0.5f);
 
+		Orange.SetActive(true);
+		Blue.SetActive(true);
+
 	}
 
 	void OnCollisionEnter2D (Collision2D coll) {
@@ -58,21 +62,26 @@ public class BallControl : MonoBehaviour {
 
 			print ("fuck");
 
-			GameObject exp = Instantiate (Boom) as GameObject;
-
-			exp.transform.position = transform.position;
 
 
 			if (coll.collider.name == ("Player1"))
 				{
 					Orange.SetActive(true);
 					Blue.SetActive(false);
+
+				GameObject exp = Instantiate (BoomOrange) as GameObject;
+
+				exp.transform.position = transform.position;
 				}
 		
 				if (coll.collider.name == ("Player2"))
 				{
 					Orange.SetActive(false);
 					Blue.SetActive(true);
+
+				GameObject exp2 = Instantiate (BoomBlue) as GameObject;
+
+				exp2.transform.position = transform.position;
 				}
 
 				}
