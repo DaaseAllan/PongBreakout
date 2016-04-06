@@ -6,7 +6,7 @@ public class Resetwall : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D hitInfo) {
 		if (hitInfo.name == "Ball") {
-			hitInfo.gameObject.SendMessage ("resetBall", 0.05, SendMessageOptions.RequireReceiver);
+			hitInfo.gameObject.GetComponent<BallControl> ().resetBall ();
 			Debug.Log("RESEEEEEEEET!!!!");
 		}
 

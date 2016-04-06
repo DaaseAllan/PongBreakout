@@ -13,6 +13,8 @@ public class BallControl : MonoBehaviour {
 	Transform[] LB;
 	Transform[] RB;
 
+	bool isResetting = false;
+
 
 	// Use this for initialization
 	void Start () {
@@ -30,7 +32,8 @@ public class BallControl : MonoBehaviour {
 
 	void Update()
 	{
-		print (GetComponent<Rigidbody2D> ().velocity.magnitude);
+		
+		//print (GetComponent<Rigidbody2D> ().velocity.magnitude);
 	}
 
 	public void GoBall(){
@@ -58,6 +61,8 @@ public class BallControl : MonoBehaviour {
 	}
 
 	public void resetBall(){
+
+
 		//HVID STREG MAND!
 		Orange.SetActive(false);
 		Blue.SetActive(false);
@@ -87,12 +92,86 @@ public class BallControl : MonoBehaviour {
 		}
 
 		foreach (Transform g in RB) {
-			print (g.name);
+			print ("Ramte block: "+g.name);
 			g.gameObject.SetActive (true);
 			if (g.GetComponent<Renderer> ()) {
 			g.GetComponent<Renderer> ().enabled = true;
 			}
 		}
+
+
+		print ("BALL HAS BEEN RESET");
+
+	
+
+
+	}
+
+
+	IEnumerator HitWithAHammer()
+	{
+		yield return new WaitForSeconds (0.5f);
+		//Reset Blockzzz
+		foreach (Transform g in LB) {
+			print (g.name);
+
+			g.gameObject.SetActive (true);
+			if (g.GetComponent<Renderer> ()) {
+				g.GetComponent<Renderer> ().enabled = true;
+			}
+		}
+
+		foreach (Transform g in RB) {
+			print ("Ramte block: "+g.name);
+			g.gameObject.SetActive (true);
+			if (g.GetComponent<Renderer> ()) {
+				g.GetComponent<Renderer> ().enabled = true;
+			}
+		}
+
+		yield return new WaitForSeconds (0.1f);
+		//Reset Blockzzz
+		foreach (Transform g in LB) {
+			print (g.name);
+
+			g.gameObject.SetActive (true);
+			if (g.GetComponent<Renderer> ()) {
+				g.GetComponent<Renderer> ().enabled = true;
+			}
+		}
+
+		foreach (Transform g in RB) {
+			print ("Ramte block: "+g.name);
+			g.gameObject.SetActive (true);
+			if (g.GetComponent<Renderer> ()) {
+				g.GetComponent<Renderer> ().enabled = true;
+			}
+		}
+
+		yield return new WaitForSeconds (0.1f);
+		//Reset Blockzzz
+		foreach (Transform g in LB) {
+			print (g.name);
+
+			g.gameObject.SetActive (true);
+			if (g.GetComponent<Renderer> ()) {
+				g.GetComponent<Renderer> ().enabled = true;
+			}
+		}
+
+		foreach (Transform g in RB) {
+			print ("Ramte block: "+g.name);
+			g.gameObject.SetActive (true);
+			if (g.GetComponent<Renderer> ()) {
+				g.GetComponent<Renderer> ().enabled = true;
+			}
+		}
+
+	}
+
+
+	void LateUpdate()
+	{
 
 
 	}
@@ -147,10 +226,18 @@ public class BallControl : MonoBehaviour {
 	{
 
 	
+		float t = 0;
+
 		// bliv usynlig
 		GO.GetComponent<Renderer> ().enabled = false;
 		// vent 0.5f seks
-		yield return new WaitForSeconds(0.1f);
+		while (t < 0.02f && isResetting == false) {
+
+			t += Time.deltaTime;
+			yield return null;
+
+		}
+
 		GO.SetActive (false);
 	}
 

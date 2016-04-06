@@ -8,7 +8,7 @@ public class SideWalls : MonoBehaviour {
 		if (hitInfo.name == "Ball") {
 			string wallName = transform.name;
 			GameManager.Score (wallName);
-			hitInfo.gameObject.SendMessage ("resetBall", 0.05, SendMessageOptions.RequireReceiver);
+			hitInfo.gameObject.GetComponent<BallControl> ().resetBall ();
 			Debug.Log("halløj");
 		}
 	
