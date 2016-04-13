@@ -10,6 +10,8 @@ public class BallControl : MonoBehaviour {
 	public GameObject LeftBlocks;
 	public GameObject RightBlocks;
 
+	private Vector2 KortPause;
+
 	Transform[] LB;
 	Transform[] RB;
 
@@ -217,7 +219,13 @@ public class BallControl : MonoBehaviour {
 
 
 			// kører blockhack 
-			StartCoroutine (BlockHack (coll.collider.gameObject));
+			//StartCoroutine (BlockHack (coll.collider.gameObject));
+
+			if (coll.gameObject.GetComponent<Exploder.ExploderObject> ()) 
+			{
+				print ("jeg er exploder top kek");
+				coll.gameObject.GetComponent<Exploder.ExploderObject> ().ExplodeRadius();
+			}
 
 			if (coll.collider.name == "R_lvl1") {
 
@@ -229,6 +237,15 @@ public class BallControl : MonoBehaviour {
 
 			if (coll.collider.name == "L_lvl1") {
 
+				 
+				KortPause = GetComponent<Rigidbody2D> ().velocity;
+				StartCoroutine (Kunstnerpause ());
+
+
+					
+
+				
+
 				if (GetComponent<Rigidbody2D> ().velocity.magnitude > 20) {
 					GetComponent<Rigidbody2D> ().velocity *= 0.66f;
 				}
@@ -236,6 +253,16 @@ public class BallControl : MonoBehaviour {
 		
 
 		}
+
+	}
+
+	IEnumerator Kunstnerpause(){
+
+		print ("0 for HELVETE");
+		GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
+		yield return new WaitForSeconds (0.5f);
+		GetComponent<Rigidbody2D> ().velocity = KortPause;
+
 
 	}
 
