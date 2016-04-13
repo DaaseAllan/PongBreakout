@@ -219,46 +219,77 @@ public class BallControl : MonoBehaviour {
 
 
 			// kører blockhack 
-			//StartCoroutine (BlockHack (coll.collider.gameObject));
+			StartCoroutine (BlockHack (coll.collider.gameObject));
 
-			if (coll.gameObject.GetComponent<Exploder.ExploderObject> ()) 
-			{
-				print ("jeg er exploder top kek");
-				coll.gameObject.GetComponent<Exploder.ExploderObject> ().ExplodeRadius();
 			}
 
 			if (coll.collider.name == "R_lvl1") {
 
-				if (GetComponent<Rigidbody2D> ().velocity.magnitude > 20) {
-					GetComponent<Rigidbody2D> ().velocity *= 0.66f;
-				}
+
+			if (GetComponent<Rigidbody2D> ().velocity.magnitude > 20) {
+				GetComponent<Rigidbody2D> ().velocity *= 0.66f;
 			}
+
+			KortPause = GetComponent<Rigidbody2D> ().velocity;
+			StartCoroutine (Kunstnerpause1 ());
+
+			}
+			
 
 
 			if (coll.collider.name == "L_lvl1") {
 
+			if (GetComponent<Rigidbody2D> ().velocity.magnitude > 20) {
+				GetComponent<Rigidbody2D> ().velocity *= 0.66f;
+			}
 				 
 				KortPause = GetComponent<Rigidbody2D> ().velocity;
-				StartCoroutine (Kunstnerpause ());
+				StartCoroutine (Kunstnerpause1 ());
 
-
-					
-
-				
-
-				if (GetComponent<Rigidbody2D> ().velocity.magnitude > 20) {
-					GetComponent<Rigidbody2D> ().velocity *= 0.66f;
-				}
 			}
+
+		if (coll.collider.name == "R_lvl2") {
+
+
+			if (GetComponent<Rigidbody2D> ().velocity.magnitude > 20) {
+				GetComponent<Rigidbody2D> ().velocity *= 0.75f;
+			}
+
+			KortPause = GetComponent<Rigidbody2D> ().velocity;
+			StartCoroutine (Kunstnerpause2 ());
+
+		}
+
+
+
+		if (coll.collider.name == "L_lvl2") {
+
+			if (GetComponent<Rigidbody2D> ().velocity.magnitude > 20) {
+				GetComponent<Rigidbody2D> ().velocity *= 0.75f;
+			}
+
+			KortPause = GetComponent<Rigidbody2D> ().velocity;
+			StartCoroutine (Kunstnerpause2 ());
+
+		}
 		
 
 		}
 
+
+	//lvl1 pause
+	IEnumerator Kunstnerpause1(){
+
+		GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
+		yield return new WaitForSeconds (0.2f);
+		GetComponent<Rigidbody2D> ().velocity = KortPause;
+
+
 	}
 
-	IEnumerator Kunstnerpause(){
+	//lvl2 pause
+	IEnumerator Kunstnerpause2(){
 
-		print ("0 for HELVETE");
 		GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
 		yield return new WaitForSeconds (0.5f);
 		GetComponent<Rigidbody2D> ().velocity = KortPause;
