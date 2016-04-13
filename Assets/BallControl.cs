@@ -33,7 +33,7 @@ public class BallControl : MonoBehaviour {
 	void Update()
 	{
 		
-		//print (GetComponent<Rigidbody2D> ().velocity.magnitude);
+		print (GetComponent<Rigidbody2D> ().velocity.magnitude);
 	}
 
 	public void GoBall(){
@@ -129,7 +129,7 @@ public class BallControl : MonoBehaviour {
 			}
 		}
 
-		yield return new WaitForSeconds (0.1f);
+		yield return new WaitForSeconds (0.3f);
 		//Reset Blockzzz
 		foreach (Transform g in LB) {
 			print (g.name);
@@ -148,7 +148,7 @@ public class BallControl : MonoBehaviour {
 			}
 		}
 
-		yield return new WaitForSeconds (0.1f);
+		yield return new WaitForSeconds (0.5f);
 		//Reset Blockzzz
 		foreach (Transform g in LB) {
 			print (g.name);
@@ -214,8 +214,25 @@ public class BallControl : MonoBehaviour {
 		//BLOCKS
 		if (coll.collider.CompareTag ("Block")) {
 
+
+
 			// kører blockhack 
 			StartCoroutine (BlockHack (coll.collider.gameObject));
+
+			if (coll.collider.name == "R_lvl1") {
+
+				if (GetComponent<Rigidbody2D> ().velocity.magnitude > 20) {
+					GetComponent<Rigidbody2D> ().velocity *= 0.66f;
+				}
+			}
+
+
+			if (coll.collider.name == "L_lvl1") {
+
+				if (GetComponent<Rigidbody2D> ().velocity.magnitude > 20) {
+					GetComponent<Rigidbody2D> ().velocity *= 0.66f;
+				}
+			}
 		
 
 		}

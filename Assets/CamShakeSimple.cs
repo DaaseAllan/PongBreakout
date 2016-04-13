@@ -35,6 +35,7 @@ public class CamShakeSimple : MonoBehaviour
 			quakeAmt = Random.value*shakeAmt*2 - shakeAmt;
 			pp.x+= quakeAmt;
 			mainCamera.transform.position = pp;
+
 		}
 	}
 
