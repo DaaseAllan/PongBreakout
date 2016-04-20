@@ -12,6 +12,7 @@ public class BallControl : MonoBehaviour
 	public GameObject RightBlocks;
 
 	private Vector2 KortPause;
+	private CircleCollider2D CoolCollider;
 
 	Transform[] LB;
 	Transform[] RB;
@@ -20,8 +21,11 @@ public class BallControl : MonoBehaviour
 
 
 	// Use this for initialization
-	void Start ()
-	{
+	void Start (){
+
+		CoolCollider = GetComponent<CircleCollider2D>();
+
+
 		StartCoroutine (hi (2.0f));
 
 		LB = LeftBlocks.GetComponentsInChildren<Transform> ();
@@ -39,6 +43,8 @@ public class BallControl : MonoBehaviour
 	{
 		
 		print (GetComponent<Rigidbody2D> ().velocity.magnitude);
+	
+	
 	}
 
 	public void GoBall ()
@@ -224,6 +230,8 @@ public class BallControl : MonoBehaviour
 		//BLOCKS
 		if (coll.collider.CompareTag ("Block")) {
 
+			StartCoroutine (disablecollider ());
+
 
 
 			// kører blockhack 
@@ -334,6 +342,12 @@ public class BallControl : MonoBehaviour
 
 	}
 
+	IEnumerator disablecollider (){
+
+		CoolCollider.enabled = false;
+		yield return new WaitForSeconds (0.2f);
+		CoolCollider.enabled = true;
+	}
 
 	//lvl1 pause
 	IEnumerator Kunstnerpause1 ()
