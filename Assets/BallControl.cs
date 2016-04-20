@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BallControl : MonoBehaviour {
+public class BallControl : MonoBehaviour
+{
 	public GameObject Orange;
 	public GameObject Blue;
 	public GameObject BoomOrange;
@@ -19,60 +20,65 @@ public class BallControl : MonoBehaviour {
 
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
 		StartCoroutine (hi (2.0f));
 
 		LB = LeftBlocks.GetComponentsInChildren<Transform> ();
 
 		RB = RightBlocks.GetComponentsInChildren<Transform> ();
-	} 
+	}
 
-	IEnumerator hi(float secs) {
+	IEnumerator hi (float secs)
+	{
 		yield return new WaitForSeconds (secs);
 		GoBall ();
 	}
 
-	void Update()
+	void Update ()
 	{
 		
 		print (GetComponent<Rigidbody2D> ().velocity.magnitude);
 	}
 
-	public void GoBall(){
+	public void GoBall ()
+	{
 
-		Orange.SetActive(true);
-		Blue.SetActive(true);
+		Orange.SetActive (true);
+		Blue.SetActive (true);
 
 		float rand = Random.Range (0.0f, 100.0f);
 		if (rand < 50.0f) {
-			GetComponent<Rigidbody2D>().AddForce (new Vector2 (20.0f, Random.Range(-15.0f,15.0f)));
+			GetComponent<Rigidbody2D> ().AddForce (new Vector2 (20.0f, Random.Range (-15.0f, 15.0f)));
 		} else {
-			GetComponent<Rigidbody2D>().AddForce (new Vector2 (-20.0f, Random.Range(-15.0f,15.0f)));
+			GetComponent<Rigidbody2D> ().AddForce (new Vector2 (-20.0f, Random.Range (-15.0f, 15.0f)));
 		}
 	}
 
-	void hasWon(){
+	void hasWon ()
+	{
 
 
-		var vel = GetComponent<Rigidbody2D>().velocity;
-			vel.y = 0;
-			vel.x = 0;
-		GetComponent<Rigidbody2D>().velocity = vel;
+		var vel = GetComponent<Rigidbody2D> ().velocity;
+		vel.y = 0;
+		vel.x = 0;
+		GetComponent<Rigidbody2D> ().velocity = vel;
 
-		gameObject.transform.position = new Vector2 (0,0);
+		gameObject.transform.position = new Vector2 (0, 0);
 	}
 
-	public void resetBall(){
+	public void resetBall ()
+	{
 
 
 		//HVID STREG MAND!
-		Orange.SetActive(false);
-		Blue.SetActive(false);
+		Orange.SetActive (false);
+		Blue.SetActive (false);
 
-		var vel = GetComponent<Rigidbody2D>().velocity;
+		var vel = GetComponent<Rigidbody2D> ().velocity;
 		vel.y = 0;
 		vel.x = 0;
-		GetComponent<Rigidbody2D>().velocity = vel;
+		GetComponent<Rigidbody2D> ().velocity = vel;
 
 		gameObject.transform.position = new Vector2 (0, 0);
 
@@ -81,7 +87,8 @@ public class BallControl : MonoBehaviour {
 		exp2.transform.position = transform.position;
 
 
-		StartCoroutine (hi (2.0f));hi (0.5f);
+		StartCoroutine (hi (2.0f));
+		hi (0.5f);
 
 		//Reset Blockzzz
 		foreach (Transform g in LB) {
@@ -94,10 +101,10 @@ public class BallControl : MonoBehaviour {
 		}
 
 		foreach (Transform g in RB) {
-			print ("Ramte block: "+g.name);
+			print ("Ramte block: " + g.name);
 			g.gameObject.SetActive (true);
 			if (g.GetComponent<Renderer> ()) {
-			g.GetComponent<Renderer> ().enabled = true;
+				g.GetComponent<Renderer> ().enabled = true;
 			}
 		}
 
@@ -110,7 +117,7 @@ public class BallControl : MonoBehaviour {
 	}
 
 
-	IEnumerator HitWithAHammer()
+	IEnumerator HitWithAHammer ()
 	{
 		yield return new WaitForSeconds (0.5f);
 		//Reset Blockzzz
@@ -124,7 +131,7 @@ public class BallControl : MonoBehaviour {
 		}
 
 		foreach (Transform g in RB) {
-			print ("Ramte block: "+g.name);
+			print ("Ramte block: " + g.name);
 			g.gameObject.SetActive (true);
 			if (g.GetComponent<Renderer> ()) {
 				g.GetComponent<Renderer> ().enabled = true;
@@ -143,7 +150,7 @@ public class BallControl : MonoBehaviour {
 		}
 
 		foreach (Transform g in RB) {
-			print ("Ramte block: "+g.name);
+			print ("Ramte block: " + g.name);
 			g.gameObject.SetActive (true);
 			if (g.GetComponent<Renderer> ()) {
 				g.GetComponent<Renderer> ().enabled = true;
@@ -162,7 +169,7 @@ public class BallControl : MonoBehaviour {
 		}
 
 		foreach (Transform g in RB) {
-			print ("Ramte block: "+g.name);
+			print ("Ramte block: " + g.name);
 			g.gameObject.SetActive (true);
 			if (g.GetComponent<Renderer> ()) {
 				g.GetComponent<Renderer> ().enabled = true;
@@ -172,13 +179,14 @@ public class BallControl : MonoBehaviour {
 	}
 
 
-	void LateUpdate()
+	void LateUpdate ()
 	{
 
 
 	}
 
-	void OnCollisionEnter2D (Collision2D coll) {
+	void OnCollisionEnter2D (Collision2D coll)
+	{
 
 		print (coll.collider.name);
 
@@ -221,9 +229,9 @@ public class BallControl : MonoBehaviour {
 			// kører blockhack 
 			StartCoroutine (BlockHack (coll.collider.gameObject));
 
-			}
+		}
 
-			if (coll.collider.name == "R_lvl1") {
+		if (coll.collider.name == "R_lvl1") {
 
 
 			if (GetComponent<Rigidbody2D> ().velocity.magnitude > 20) {
@@ -233,20 +241,20 @@ public class BallControl : MonoBehaviour {
 			KortPause = GetComponent<Rigidbody2D> ().velocity;
 			StartCoroutine (Kunstnerpause1 ());
 
-			}
+		}
 			
 
 
-			if (coll.collider.name == "L_lvl1") {
+		if (coll.collider.name == "L_lvl1") {
 
 			if (GetComponent<Rigidbody2D> ().velocity.magnitude > 20) {
 				GetComponent<Rigidbody2D> ().velocity *= 0.66f;
 			}
 				 
-				KortPause = GetComponent<Rigidbody2D> ().velocity;
-				StartCoroutine (Kunstnerpause1 ());
+			KortPause = GetComponent<Rigidbody2D> ().velocity;
+			StartCoroutine (Kunstnerpause1 ());
 
-			}
+		}
 
 		if (coll.collider.name == "R_lvl2") {
 
@@ -272,13 +280,64 @@ public class BallControl : MonoBehaviour {
 			StartCoroutine (Kunstnerpause2 ());
 
 		}
-		
+
+		if (coll.collider.name == "R_lvl3") {
+
+
+			if (GetComponent<Rigidbody2D> ().velocity.magnitude > 20) {
+				GetComponent<Rigidbody2D> ().velocity *= 0.75f;
+			}
+
+			KortPause = GetComponent<Rigidbody2D> ().velocity;
+			StartCoroutine (Kunstnerpause3 ());
 
 		}
 
 
+
+		if (coll.collider.name == "L_lvl3") {
+
+			if (GetComponent<Rigidbody2D> ().velocity.magnitude > 20) {
+				GetComponent<Rigidbody2D> ().velocity *= 0.75f;
+			}
+
+			KortPause = GetComponent<Rigidbody2D> ().velocity;
+			StartCoroutine (Kunstnerpause3 ());
+
+		}
+
+		if (coll.collider.name == "R_lvl4") {
+
+
+			if (GetComponent<Rigidbody2D> ().velocity.magnitude > 20) {
+				GetComponent<Rigidbody2D> ().velocity *= 0.75f;
+			}
+
+			KortPause = GetComponent<Rigidbody2D> ().velocity;
+			StartCoroutine (Kunstnerpause4 ());
+
+		}
+
+
+
+		if (coll.collider.name == "L_lvl4") {
+
+			if (GetComponent<Rigidbody2D> ().velocity.magnitude > 20) {
+				GetComponent<Rigidbody2D> ().velocity *= 0.75f;
+			}
+
+			KortPause = GetComponent<Rigidbody2D> ().velocity;
+			StartCoroutine (Kunstnerpause4 ());
+
+		}
+		
+
+	}
+
+
 	//lvl1 pause
-	IEnumerator Kunstnerpause1(){
+	IEnumerator Kunstnerpause1 ()
+	{
 
 		GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
 		yield return new WaitForSeconds (0.2f);
@@ -288,7 +347,8 @@ public class BallControl : MonoBehaviour {
 	}
 
 	//lvl2 pause
-	IEnumerator Kunstnerpause2(){
+	IEnumerator Kunstnerpause2 ()
+	{
 
 		GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
 		yield return new WaitForSeconds (0.5f);
@@ -297,8 +357,33 @@ public class BallControl : MonoBehaviour {
 
 	}
 
-	IEnumerator BlockHack(GameObject GO)
+	//lvl3 pause
+	IEnumerator Kunstnerpause3 ()
 	{
+
+		GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
+		yield return new WaitForSeconds (1f);
+		GetComponent<Rigidbody2D> ().velocity = KortPause;
+
+
+	}
+
+	//lvl4 pause
+	IEnumerator Kunstnerpause4 ()
+	{
+
+		GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
+		yield return new WaitForSeconds (2f);
+		GetComponent<Rigidbody2D> ().velocity = KortPause;
+
+
+	}
+
+	IEnumerator BlockHack (GameObject GO)
+	{
+
+
+
 
 	
 		float t = 0;
@@ -319,4 +404,4 @@ public class BallControl : MonoBehaviour {
 
 }
 
-	// Update is called once per frame
+// Update is called once per frame
