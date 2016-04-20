@@ -10,6 +10,8 @@ public class BallControl : MonoBehaviour
 	public GameObject Electric;
 	public GameObject LeftBlocks;
 	public GameObject RightBlocks;
+	public GameObject SparkOrange;
+	public GameObject SparkBlue;
 
 	private Vector2 KortPause;
 	private CircleCollider2D CoolCollider;
