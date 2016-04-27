@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CamShakeSimple : MonoBehaviour 
 {
-
+	public bool enableshake;
 	Vector3 originalCameraPosition;
 
 	float shakeAmt = 0;
@@ -18,11 +18,11 @@ public class CamShakeSimple : MonoBehaviour
 
 	void OnCollisionEnter2D(Collision2D coll) 
 	{
-
-		shakeAmt = coll.relativeVelocity.magnitude * 0.0025f;
-		InvokeRepeating("CameraShake", 0, .01f);
-		Invoke("StopShaking", 0.2f);
-
+		if (enableshake == true) {
+			shakeAmt = coll.relativeVelocity.magnitude * 0.0025f;
+			InvokeRepeating ("CameraShake", 0, .01f);
+			Invoke ("StopShaking", 0.2f);
+		}
 	}
 
 	void CameraShake()
