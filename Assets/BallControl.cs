@@ -219,6 +219,9 @@ public class BallControl : MonoBehaviour
 		}
 	}
 
+
+
+
 	void OnCollisionEnter2D (Collision2D coll)
 	{
 
@@ -237,7 +240,7 @@ public class BallControl : MonoBehaviour
 
 
 			if (coll.collider.name == ("Player1")) {
-				Orange.SetActive (true);
+				Orange.GetComponent<TrailRenderer> ().time = 1;
 				Blue.SetActive (false);
 				White.SetActive (false);
 				if (Row2 == true){
