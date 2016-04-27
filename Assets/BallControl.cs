@@ -51,9 +51,9 @@ public class BallControl : MonoBehaviour
 
 	public void GoBall ()
 	{
-
-		Orange.SetActive (true);
-		Blue.SetActive (true);
+		//Disable trails ved start
+		Orange.SetActive (false);
+		Blue.SetActive (false);
 
 		float rand = Random.Range (0.0f, 100.0f);
 		if (rand < 50.0f) {
@@ -233,6 +233,9 @@ public class BallControl : MonoBehaviour
 		if (coll.collider.CompareTag ("Block")) {
 
 			StartCoroutine (disablecollider ());
+
+			Orange.SetActive (true);
+			Blue.SetActive (true);
 
 
 
