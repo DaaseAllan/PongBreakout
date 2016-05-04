@@ -13,6 +13,7 @@ public class BallControl : MonoBehaviour
 	public GameObject RightBlocks;
 	public GameObject SparkOrange;
 	public GameObject SparkBlue;
+	public GameObject Trekantexp;
 
 	private Vector2 KortPause;
 	private CircleCollider2D CoolCollider;
@@ -267,6 +268,10 @@ public class BallControl : MonoBehaviour
 		//BLOCKS
 		if (coll.collider.CompareTag ("Block")) {
 
+			GameObject trekanter = Instantiate (Trekantexp) as GameObject;
+			trekanter.transform.position = coll.contacts [0].point;
+			Destroy (trekanter, 2.9f);
+
 
 			Orange.GetComponent<TrailRenderer> ().time = 0;
 			Blue.GetComponent<TrailRenderer> ().time = 0;
@@ -281,6 +286,8 @@ public class BallControl : MonoBehaviour
 
 		if (coll.collider.name == "R_lvl1") {
 
+			GameObject Spark2 = Instantiate (SparkBlue) as GameObject;
+			Spark2.transform.position = coll.contacts [0].point;
 
 
 			if (GetComponent<Rigidbody2D> ().velocity.magnitude > 20) {
@@ -299,7 +306,8 @@ public class BallControl : MonoBehaviour
 
 		if (coll.collider.name == "L_lvl1") {
 
-
+			GameObject Spark1 = Instantiate (SparkOrange) as GameObject;
+			Spark1.transform.position = coll.contacts [0].point;
 
 			if (GetComponent<Rigidbody2D> ().velocity.magnitude > 20) {
 				GetComponent<Rigidbody2D> ().velocity *= 0.66f;
@@ -313,6 +321,8 @@ public class BallControl : MonoBehaviour
 
 		if (coll.collider.name == "R_lvl2") {
 
+			GameObject Spark2 = Instantiate (SparkBlue) as GameObject;
+			Spark2.transform.position = coll.contacts [0].point;
 
 			if (GetComponent<Rigidbody2D> ().velocity.magnitude > 20) {
 				GetComponent<Rigidbody2D> ().velocity *= 0.75f;
@@ -328,6 +338,9 @@ public class BallControl : MonoBehaviour
 
 		if (coll.collider.name == "L_lvl2") {
 
+			GameObject Spark1 = Instantiate (SparkOrange) as GameObject;
+			Spark1.transform.position = coll.contacts [0].point;
+
 			if (GetComponent<Rigidbody2D> ().velocity.magnitude > 20) {
 				GetComponent<Rigidbody2D> ().velocity *= 0.75f;
 			}
@@ -340,6 +353,8 @@ public class BallControl : MonoBehaviour
 
 		if (coll.collider.name == "R_lvl3") {
 
+			GameObject Spark2 = Instantiate (SparkBlue) as GameObject;
+			Spark2.transform.position = coll.contacts [0].point;
 
 			if (GetComponent<Rigidbody2D> ().velocity.magnitude > 20) {
 				GetComponent<Rigidbody2D> ().velocity *= 0.75f;
@@ -355,6 +370,9 @@ public class BallControl : MonoBehaviour
 
 		if (coll.collider.name == "L_lvl3") {
 
+			GameObject Spark1 = Instantiate (SparkOrange) as GameObject;
+			Spark1.transform.position = coll.contacts [0].point;
+
 			if (GetComponent<Rigidbody2D> ().velocity.magnitude > 20) {
 				GetComponent<Rigidbody2D> ().velocity *= 0.75f;
 			}
@@ -366,6 +384,8 @@ public class BallControl : MonoBehaviour
 
 		if (coll.collider.name == "R_lvl4") {
 
+			GameObject Spark1 = Instantiate (SparkOrange) as GameObject;
+			Spark1.transform.position = coll.contacts [0].point;
 
 			if (GetComponent<Rigidbody2D> ().velocity.magnitude > 20) {
 				GetComponent<Rigidbody2D> ().velocity *= 0.75f;
@@ -381,6 +401,9 @@ public class BallControl : MonoBehaviour
 
 
 		if (coll.collider.name == "L_lvl4") {
+
+			GameObject Spark1 = Instantiate (SparkOrange) as GameObject;
+			Spark1.transform.position = coll.contacts [0].point;
 
 			if (GetComponent<Rigidbody2D> ().velocity.magnitude > 20) {
 				GetComponent<Rigidbody2D> ().velocity *= 0.75f;
