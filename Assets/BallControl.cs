@@ -57,9 +57,9 @@ public class BallControl : MonoBehaviour
 	public void GoBall ()
 	{
 		//Disable trails ved start
-		Orange.SetActive (false);
-		Blue.SetActive (false);
-		White.SetActive (false);
+		Orange.GetComponent<TrailRenderer> ().time = 0;
+		Blue.GetComponent<TrailRenderer> ().time = 0;
+		White.GetComponent<TrailRenderer> ().time = 0;
 
 		float rand = Random.Range (0.0f, 100.0f);
 		if (rand < 50.0f) {
@@ -87,9 +87,9 @@ public class BallControl : MonoBehaviour
 		Row1 = false;
 		Row2 = false;
 		//væk med trails
-		Orange.SetActive (false);
-		Blue.SetActive (false);
-		White.SetActive (false);
+		Orange.GetComponent<TrailRenderer> ().time = 0;
+		Blue.GetComponent<TrailRenderer> ().time = 0;
+		White.GetComponent<TrailRenderer> ().time = 0;
 
 		var vel = GetComponent<Rigidbody2D> ().velocity;
 		vel.y = 0;
@@ -241,8 +241,8 @@ public class BallControl : MonoBehaviour
 
 			if (coll.collider.name == ("Player1")) {
 				Orange.GetComponent<TrailRenderer> ().time = 1;
-				Blue.SetActive (false);
-				White.SetActive (false);
+				Blue.GetComponent<TrailRenderer> ().time = 0;
+				White.GetComponent<TrailRenderer> ().time = 0;
 				if (Row2 == true){
 					GameObject exp = Instantiate (BoomOrange) as GameObject;
 				exp.transform.position = transform.position;
@@ -250,9 +250,9 @@ public class BallControl : MonoBehaviour
 			}
 		
 			if (coll.collider.name == ("Player2")) {
-				Orange.SetActive (false);
-				Blue.SetActive (true);
-				White.SetActive (false);
+				Orange.GetComponent<TrailRenderer> ().time = 0;
+				Blue.GetComponent<TrailRenderer> ().time = 1;
+				White.GetComponent<TrailRenderer> ().time = 0;
 				if (Row2 == true) {
 					GameObject exp2 = Instantiate (BoomBlue) as GameObject;
 					exp2.transform.position = transform.position;
@@ -268,9 +268,9 @@ public class BallControl : MonoBehaviour
 		if (coll.collider.CompareTag ("Block")) {
 
 
-			Orange.SetActive (false);
-			Blue.SetActive (false);
-			White.SetActive (true);
+			Orange.GetComponent<TrailRenderer> ().time = 0;
+			Blue.GetComponent<TrailRenderer> ().time = 0;
+			White.GetComponent<TrailRenderer> ().time = 1;
 
 
 
