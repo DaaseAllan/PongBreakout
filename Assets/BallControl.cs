@@ -23,6 +23,7 @@ public class BallControl : MonoBehaviour
 	private bool Row2;
 	private bool Row3;
 	private bool Row4;
+	private int LastPlayer;
 
 	private Vector3 Player1startscale;
 	private Vector3 Player2startscale;
@@ -235,16 +236,18 @@ public class BallControl : MonoBehaviour
 
 	void OnTriggerEnter2D (Collider2D coll)
 	{
-		if (coll.CompareTag == ("PowerupLarge")) {
+		if (coll.CompareTag ("PowerupLarge")) {
 			print ("Powerup");
-			if (Orange.GetComponent<TrailRenderer> ().enabled) 
+			if (LastPlayer == 1)
 			{
 				//player1
 				Player1.GetComponent<Player1Control>().SavedPowerup = "PowerupLarge";
+				print ("Player1hej");
 			}
-			else 
+			else if(LastPlayer == 2)
 			{
 				Player2.GetComponent<Player2Control>().SavedPowerup = "PowerupLarge";
+				print ("Player2222222hej");
 			}
 			Destroy (coll.gameObject);
 		}
@@ -270,6 +273,8 @@ public class BallControl : MonoBehaviour
 
 
 			if (coll.collider.name == ("Player1")) {
+
+				LastPlayer = 1;
 				Orange.GetComponent<TrailRenderer> ().time = 1;
 				Blue.GetComponent<TrailRenderer> ().time = 0;
 				White.GetComponent<TrailRenderer> ().time = 0;
@@ -280,6 +285,8 @@ public class BallControl : MonoBehaviour
 			}
 		
 			if (coll.collider.name == ("Player2")) {
+
+				LastPlayer = 2;
 				Orange.GetComponent<TrailRenderer> ().time = 0;
 				Blue.GetComponent<TrailRenderer> ().time = 1;
 				White.GetComponent<TrailRenderer> ().time = 0;

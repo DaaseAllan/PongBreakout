@@ -7,6 +7,7 @@ public class Player2Control : MonoBehaviour {
 	public KeyCode moveDown = KeyCode.S;
 	public float speed = 10.0f;
 	public string SavedPowerup;
+	private Vector3 Player2startscale;
 
 		// Use this for initialization
 	void Start () {
@@ -28,6 +29,12 @@ public class Player2Control : MonoBehaviour {
 
 		}
 
+		if (Input.GetKeyDown (KeyCode.T)) 
+		{
+			UsePowerup ();
+		}
+
+
 		else if (Input.GetKey (moveDown))
 		{
 
@@ -39,5 +46,19 @@ public class Player2Control : MonoBehaviour {
 		GetComponent<Rigidbody2D> ().velocity = vel;
 
 	}
+
+
+	void UsePowerup()
+	{
+		if (SavedPowerup == "PowerupLarge") {
+
+			transform.localScale = Player2startscale + Vector3.up*2;
+
+
+			SavedPowerup = "";
+		}
+	}
+
+
 }
 
