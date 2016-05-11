@@ -6,6 +6,7 @@ public class Player2Control : MonoBehaviour {
 	public KeyCode moveUp = KeyCode.W;
 	public KeyCode moveDown = KeyCode.S;
 	public float speed = 10.0f;
+	public string SavedPowerup;
 
 		// Use this for initialization
 	void Start () {

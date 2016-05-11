@@ -14,6 +14,8 @@ public class BallControl : MonoBehaviour
 	public GameObject SparkOrange;
 	public GameObject SparkBlue;
 	public GameObject Trekantexp;
+	public GameObject Player1;
+	public GameObject Player2;
 
 	private Vector2 KortPause;
 	private CircleCollider2D CoolCollider;
@@ -21,6 +23,9 @@ public class BallControl : MonoBehaviour
 	private bool Row2;
 	private bool Row3;
 	private bool Row4;
+
+	private Vector3 Player1startscale;
+	private Vector3 Player2startscale;
 
 	Transform[] LB;
 	Transform[] RB;
@@ -32,6 +37,10 @@ public class BallControl : MonoBehaviour
 	void Start (){
 		GetComponent<CamShakeSimple> ().enableshake = false;
 		CoolCollider = GetComponent<CircleCollider2D>();
+
+
+		Player1startscale = Player1.transform.localScale;
+		Player2startscale = Player2.transform.localScale;
 
 
 		StartCoroutine (hi (2.0f));
@@ -224,10 +233,26 @@ public class BallControl : MonoBehaviour
 		}
 	}
 
+	void OnTriggerEnter2D (Collider2D coll)
+	{
+		if (coll.CompareTag == ("PowerupLarge")) {
+			print ("Powerup");
+			if (Orange.GetComponent<TrailRenderer> ().enabled) 
+			{
+				//player1
+				Player1.GetComponent<Player1Control>().SavedPowerup = "PowerupLarge";
+			}
+			else 
+			{
+				Player2.GetComponent<Player2Control>().SavedPowerup = "PowerupLarge";
+			}
+			Destroy (coll.gameObject);
+		}
 
-
+	}
 
 	void OnCollisionEnter2D (Collision2D coll)
+
 	{
 
 		print (coll.collider.name);
@@ -266,6 +291,7 @@ public class BallControl : MonoBehaviour
 			}
 
 		}
+
 
 
 			
