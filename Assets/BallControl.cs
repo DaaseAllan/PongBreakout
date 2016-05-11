@@ -86,6 +86,10 @@ public class BallControl : MonoBehaviour
 	{
 		GetComponent<CamShakeSimple> ().enableshake = false;
 		Row1 = false;
+		Orange.GetComponent<TrailRenderer> ().enabled = false;
+		Blue.GetComponent<TrailRenderer> ().enabled = false;
+		White.GetComponent<TrailRenderer> ().enabled = false;
+		GetComponent<CamShakeSimple> ().enableshake = false;
 		Row2 = false;
 		//væk med trails
 		Orange.GetComponent<TrailRenderer> ().time = 0;
