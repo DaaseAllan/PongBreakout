@@ -54,7 +54,7 @@ public class Player1Control : MonoBehaviour {
 	{
 		if (SavedPowerup == "PowerupLarge") {
 
-			transform.localScale = Player1startscale + Vector3.up*2;
+			transform.localScale = Player1startscale + (Vector3.up*2);
 
 
 			SavedPowerup = "";

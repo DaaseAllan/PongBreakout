@@ -9,9 +9,9 @@ public class Player2Control : MonoBehaviour {
 	public string SavedPowerup;
 	private Vector3 Player2startscale;
 
-		// Use this for initialization
 	void Start () {
-	
+
+		Player2startscale = transform.localScale;
 
 	}
 
@@ -52,7 +52,7 @@ public class Player2Control : MonoBehaviour {
 	{
 		if (SavedPowerup == "PowerupLarge") {
 
-			transform.localScale = Player2startscale + Vector3.up*2;
+			transform.localScale = Player2startscale + (Vector3.up*2);
 
 
 			SavedPowerup = "";
