@@ -49,6 +49,11 @@ public class Player1Control : MonoBehaviour {
 
 	}
 
+	IEnumerator PUscale ()
+	{
+		yield return new WaitForSeconds (5);
+		transform.localScale = Player1startscale;
+	}
 
 	void UsePowerup()
 	{
@@ -56,6 +61,7 @@ public class Player1Control : MonoBehaviour {
 
 			transform.localScale = Player1startscale + (Vector3.up*2);
 
+			StartCoroutine (PUscale ());
 
 			SavedPowerup = "";
 		}

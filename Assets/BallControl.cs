@@ -17,6 +17,8 @@ public class BallControl : MonoBehaviour
 	public GameObject Player1;
 	public GameObject Player2;
 
+	public float twofast4game;
+
 	private Vector2 KortPause;
 	private CircleCollider2D CoolCollider;
 	private bool Row1;
@@ -266,8 +268,9 @@ public class BallControl : MonoBehaviour
 			velY = (velY / 2.0f) + (coll.collider.GetComponent<Rigidbody2D> ().velocity.y / 3.0f);
 			GetComponent<Rigidbody2D> ().velocity = new Vector2 (velX, velY);
 
-			GetComponent<Rigidbody2D> ().velocity *= 1.1f;
-
+			if (GetComponent<Rigidbody2D> ().velocity.magnitude < twofast4game) {
+				GetComponent<Rigidbody2D> ().velocity *= 1.2f;
+			}
 			print ("fuck");
 
 
@@ -461,9 +464,9 @@ public class BallControl : MonoBehaviour
 	IEnumerator Kunstnerpause1 ()
 	{
 
-			GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
-			yield return new WaitForSeconds (0.2f);
-			GetComponent<Rigidbody2D> ().velocity = KortPause;
+		Time.timeScale = 0.25f;
+			yield return new WaitForSeconds (0.5f);
+		Time.timeScale = 1;
 
 
 	}
@@ -472,9 +475,9 @@ public class BallControl : MonoBehaviour
 	IEnumerator Kunstnerpause2 ()
 	{
 
-		GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
-		yield return new WaitForSeconds (0.5f);
-		GetComponent<Rigidbody2D> ().velocity = KortPause;
+		Time.timeScale = 0.25f;
+		yield return new WaitForSeconds (1f);
+		Time.timeScale = 1;
 
 
 	}
@@ -483,9 +486,9 @@ public class BallControl : MonoBehaviour
 	IEnumerator Kunstnerpause3 ()
 	{
 
-		GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
-		yield return new WaitForSeconds (1f);
-		GetComponent<Rigidbody2D> ().velocity = KortPause;
+		Time.timeScale = 0.25f;
+		yield return new WaitForSeconds (1.5f);
+		Time.timeScale = 1;
 
 
 	}
@@ -494,9 +497,9 @@ public class BallControl : MonoBehaviour
 	IEnumerator Kunstnerpause4 ()
 	{
 
-		GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
+		Time.timeScale = 0.25f;
 		yield return new WaitForSeconds (2f);
-		GetComponent<Rigidbody2D> ().velocity = KortPause;
+		Time.timeScale = 1;
 
 
 	}
