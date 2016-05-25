@@ -58,6 +58,8 @@ public class Spawnmanager : MonoBehaviour {
 
 		Isrunning = false;
 
-
+		if (Spawnpowerup != null) {
+			Destroy (Spawnpowerup);
+		}
 	}
 }

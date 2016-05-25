@@ -16,6 +16,7 @@ public class BallControl : MonoBehaviour
 	public GameObject Trekantexp;
 	public GameObject Player1;
 	public GameObject Player2;
+	public Spawnmanager Spawnmanager;
 
 	public float twofast4game;
 
@@ -76,9 +77,9 @@ public class BallControl : MonoBehaviour
 
 		float rand = Random.Range (0.0f, 100.0f);
 		if (rand < 50.0f) {
-			GetComponent<Rigidbody2D> ().AddForce (new Vector2 (20.0f, Random.Range (-15.0f, 15.0f)));
+			GetComponent<Rigidbody2D> ().AddForce (new Vector2 (25.0f, Random.Range (-15.0f, 15.0f)));
 		} else {
-			GetComponent<Rigidbody2D> ().AddForce (new Vector2 (-20.0f, Random.Range (-15.0f, 15.0f)));
+			GetComponent<Rigidbody2D> ().AddForce (new Vector2 (-25.0f, Random.Range (-15.0f, 15.0f)));
 		}
 	}
 
@@ -96,6 +97,9 @@ public class BallControl : MonoBehaviour
 
 	public void resetBall ()
 	{
+
+		Spawnmanager.ResetManager();
+
 		GetComponent<CamShakeSimple> ().enableshake = false;
 		Row1 = false;
 		Orange.GetComponent<TrailRenderer> ().enabled = false;
@@ -221,7 +225,7 @@ public class BallControl : MonoBehaviour
 			Blue.GetComponent<TrailRenderer> ().enabled = true;
 			White.GetComponent<TrailRenderer> ().enabled = true;
 			GetComponent<CamShakeSimple> ().enableshake = true;
-		
+			Spawnmanager.RunAgain ();
 			StartCoroutine (Kunstnerpause1 ());
 		
 		}
@@ -240,6 +244,7 @@ public class BallControl : MonoBehaviour
 	{
 		if (coll.CompareTag ("PowerupLarge")) {
 			print ("Powerup");
+			Spawnmanager.RunAgain ();
 			if (LastPlayer == 1)
 			{
 				//player1
@@ -261,6 +266,11 @@ public class BallControl : MonoBehaviour
 	{
 
 		print (coll.collider.name);
+
+		if (GetComponent<Rigidbody2D> ().velocity.magnitude < 5 && Time.timeScale > 1) 
+		{
+			GetComponent<Rigidbody2D> ().velocity = new Vector2(GetComponent<Rigidbody2D> ().velocity.x * 1.25f, GetComponent<Rigidbody2D> ().velocity.y * 1.25f);
+		}
 
 		if (coll.collider.CompareTag ("Player")) {
 			var velY = GetComponent<Rigidbody2D> ().velocity.y;
