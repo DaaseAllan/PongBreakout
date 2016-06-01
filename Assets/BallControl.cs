@@ -28,6 +28,8 @@ public class BallControl : MonoBehaviour
 	private bool Row3;
 	private bool Row4;
 	private int LastPlayer;
+	private int HitInRow;
+	private float LastY;
 
 	private Vector3 Player1startscale;
 	private Vector3 Player2startscale;
@@ -75,6 +77,8 @@ public class BallControl : MonoBehaviour
 		Orange.GetComponent<TrailRenderer> ().time = 0;
 		Blue.GetComponent<TrailRenderer> ().time = 0;
 		White.GetComponent<TrailRenderer> ().time = 0;
+
+		HitInRow = 0;
 
 		float rand = Random.Range (0.0f, 100.0f);
 		if (rand < 50.0f) {
@@ -258,12 +262,12 @@ public class BallControl : MonoBehaviour
 			Spawnmanager.RunAgain ();
 			if (LastPlayer == 1)
 			{
-				//player1
+				//player1 rød
 				Player1.GetComponent<Player1Control>().SavedPowerup = "PowerupLarge";
 				print ("Player1hej");
 			}
 			else if(LastPlayer == 2)
-			{
+			{//player 2 blå
 				Player2.GetComponent<Player2Control>().SavedPowerup = "PowerupLarge";
 				print ("Player2222222hej");
 			}
@@ -292,6 +296,30 @@ public class BallControl : MonoBehaviour
 			if (GetComponent<Rigidbody2D> ().velocity.magnitude < twofast4game) {
 				GetComponent<Rigidbody2D> ().velocity *= 1.2f;
 			}
+
+			if (LastY == GetComponent<Rigidbody2D> ().transform.position.y) {
+				HitInRow += 1;
+				print ("LASTYVIRKER");
+				print (HitInRow);
+			} else {
+				HitInRow = 0;
+
+			}
+
+			if (HitInRow > 1) {
+				if (GetComponent<Rigidbody2D> ().transform.position.y > 0) {
+					GetComponent<Rigidbody2D> ().AddForce (Vector2.down * 20);
+				} else {
+					GetComponent<Rigidbody2D> ().AddForce (Vector2.up * 20);
+				}
+					
+			}
+				
+
+			LastY = GetComponent<Rigidbody2D> ().transform.position.y;
+
+
+
 			print ("fuck");
 
 
@@ -347,12 +375,12 @@ public class BallControl : MonoBehaviour
 
 		if (coll.collider.name == "R_lvl1") {
 			
-			if (Blue.activeSelf == true) {
+			if (LastPlayer == 2) {
 				GameObject Spark2 = Instantiate (SparkBlue) as GameObject;
 				Spark2.transform.position = coll.contacts [0].point;
 			}
 
-				if (Orange.activeSelf == true) {
+			if (LastPlayer == 1) {
 					GameObject Spark1 = Instantiate (SparkOrange) as GameObject;
 					Spark1.transform.position = coll.contacts [0].point;
 			}
@@ -373,8 +401,15 @@ public class BallControl : MonoBehaviour
 
 		if (coll.collider.name == "L_lvl1") {
 
-			GameObject Spark1 = Instantiate (SparkOrange) as GameObject;
-			Spark1.transform.position = coll.contacts [0].point;
+			if (LastPlayer == 2) {
+				GameObject Spark2 = Instantiate (SparkBlue) as GameObject;
+				Spark2.transform.position = coll.contacts [0].point;
+			}
+
+			if (LastPlayer == 1) {
+				GameObject Spark1 = Instantiate (SparkOrange) as GameObject;
+				Spark1.transform.position = coll.contacts [0].point;
+			}
 
 			if (GetComponent<Rigidbody2D> ().velocity.magnitude > 20) {
 				GetComponent<Rigidbody2D> ().velocity *= 0.66f;
@@ -388,8 +423,15 @@ public class BallControl : MonoBehaviour
 
 		if (coll.collider.name == "R_lvl2") {
 
-			GameObject Spark2 = Instantiate (SparkBlue) as GameObject;
-			Spark2.transform.position = coll.contacts [0].point;
+				if (LastPlayer == 2) {
+					GameObject Spark2 = Instantiate (SparkBlue) as GameObject;
+					Spark2.transform.position = coll.contacts [0].point;
+				}
+
+				if (LastPlayer == 1) {
+					GameObject Spark1 = Instantiate (SparkOrange) as GameObject;
+					Spark1.transform.position = coll.contacts [0].point;
+				}
 
 			if (GetComponent<Rigidbody2D> ().velocity.magnitude > 20) {
 				GetComponent<Rigidbody2D> ().velocity *= 0.75f;
@@ -405,8 +447,15 @@ public class BallControl : MonoBehaviour
 
 		if (coll.collider.name == "L_lvl2") {
 
-			GameObject Spark1 = Instantiate (SparkOrange) as GameObject;
-			Spark1.transform.position = coll.contacts [0].point;
+					if (LastPlayer == 2) {
+						GameObject Spark2 = Instantiate (SparkBlue) as GameObject;
+						Spark2.transform.position = coll.contacts [0].point;
+					}
+
+					if (LastPlayer == 1) {
+						GameObject Spark1 = Instantiate (SparkOrange) as GameObject;
+						Spark1.transform.position = coll.contacts [0].point;
+					}
 
 			if (GetComponent<Rigidbody2D> ().velocity.magnitude > 20) {
 				GetComponent<Rigidbody2D> ().velocity *= 0.75f;
@@ -420,8 +469,15 @@ public class BallControl : MonoBehaviour
 
 		if (coll.collider.name == "R_lvl3") {
 
-			GameObject Spark2 = Instantiate (SparkBlue) as GameObject;
-			Spark2.transform.position = coll.contacts [0].point;
+						if (LastPlayer == 2) {
+							GameObject Spark2 = Instantiate (SparkBlue) as GameObject;
+							Spark2.transform.position = coll.contacts [0].point;
+						}
+
+						if (LastPlayer == 1) {
+							GameObject Spark1 = Instantiate (SparkOrange) as GameObject;
+							Spark1.transform.position = coll.contacts [0].point;
+						}
 
 			if (GetComponent<Rigidbody2D> ().velocity.magnitude > 20) {
 				GetComponent<Rigidbody2D> ().velocity *= 0.75f;
@@ -438,8 +494,15 @@ public class BallControl : MonoBehaviour
 
 		if (coll.collider.name == "L_lvl3") {
 
-			GameObject Spark1 = Instantiate (SparkOrange) as GameObject;
-			Spark1.transform.position = coll.contacts [0].point;
+							if (LastPlayer == 2) {
+								GameObject Spark2 = Instantiate (SparkBlue) as GameObject;
+								Spark2.transform.position = coll.contacts [0].point;
+							}
+
+							if (LastPlayer == 1) {
+								GameObject Spark1 = Instantiate (SparkOrange) as GameObject;
+								Spark1.transform.position = coll.contacts [0].point;
+							}
 
 			if (GetComponent<Rigidbody2D> ().velocity.magnitude > 20) {
 				GetComponent<Rigidbody2D> ().velocity *= 0.75f;
@@ -452,8 +515,15 @@ public class BallControl : MonoBehaviour
 
 		if (coll.collider.name == "R_lvl4") {
 
-			GameObject Spark1 = Instantiate (SparkOrange) as GameObject;
-			Spark1.transform.position = coll.contacts [0].point;
+								if (LastPlayer == 2) {
+									GameObject Spark2 = Instantiate (SparkBlue) as GameObject;
+									Spark2.transform.position = coll.contacts [0].point;
+								}
+
+								if (LastPlayer == 1) {
+									GameObject Spark1 = Instantiate (SparkOrange) as GameObject;
+									Spark1.transform.position = coll.contacts [0].point;
+								}
 
 			if (GetComponent<Rigidbody2D> ().velocity.magnitude > 20) {
 				GetComponent<Rigidbody2D> ().velocity *= 0.75f;
@@ -470,8 +540,15 @@ public class BallControl : MonoBehaviour
 
 		if (coll.collider.name == "L_lvl4") {
 
-			GameObject Spark1 = Instantiate (SparkOrange) as GameObject;
-			Spark1.transform.position = coll.contacts [0].point;
+									if (LastPlayer == 2) {
+										GameObject Spark2 = Instantiate (SparkBlue) as GameObject;
+										Spark2.transform.position = coll.contacts [0].point;
+									}
+
+									if (LastPlayer == 1) {
+										GameObject Spark1 = Instantiate (SparkOrange) as GameObject;
+										Spark1.transform.position = coll.contacts [0].point;
+									}
 
 			if (GetComponent<Rigidbody2D> ().velocity.magnitude > 20) {
 				GetComponent<Rigidbody2D> ().velocity *= 0.75f;
@@ -482,6 +559,7 @@ public class BallControl : MonoBehaviour
 			}			StartCoroutine (Kunstnerpause4 ());
 
 		}
+
 		
 
 	}
