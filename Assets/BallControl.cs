@@ -309,8 +309,10 @@ public class BallControl : MonoBehaviour
 			if (HitInRow > 1) {
 				if (GetComponent<Rigidbody2D> ().transform.position.y > 0) {
 					GetComponent<Rigidbody2D> ().AddForce (Vector2.down * 20);
+					GetComponent<Rigidbody2D> ().velocity *= 0.75f;
 				} else {
 					GetComponent<Rigidbody2D> ().AddForce (Vector2.up * 20);
+					GetComponent<Rigidbody2D> ().velocity *= 0.75f;
 				}
 					
 			}
