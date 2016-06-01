@@ -13,6 +13,7 @@ public class BallControl : MonoBehaviour
 	public GameObject RightBlocks;
 	public GameObject SparkOrange;
 	public GameObject SparkBlue;
+	public GameObject SparkWhite;
 	public GameObject Trekantexp;
 	public GameObject Player1;
 	public GameObject Player2;
@@ -107,6 +108,7 @@ public class BallControl : MonoBehaviour
 		White.GetComponent<TrailRenderer> ().enabled = false;
 		GetComponent<CamShakeSimple> ().enableshake = false;
 		Row2 = false;
+		Row3 = false;
 		//væk med trails
 		Orange.GetComponent<TrailRenderer> ().time = 0;
 		Blue.GetComponent<TrailRenderer> ().time = 0;
@@ -145,7 +147,7 @@ public class BallControl : MonoBehaviour
 			}
 		}
 
-		Spawnmanager.ResetManager();
+		//Spawnmanager.ResetManager();
 
 		print ("BALL HAS BEEN RESET");
 
@@ -238,6 +240,14 @@ public class BallControl : MonoBehaviour
 		if (Row2 == false) {
 			Row2 = true;
 			StartCoroutine (Kunstnerpause2 ());
+		}
+	}
+
+	void row3thing ()
+	{
+		if (Row3 == false) {
+			Row3 = true;
+			StartCoroutine (Kunstnerpause3 ());
 		}
 	}
 
@@ -336,10 +346,16 @@ public class BallControl : MonoBehaviour
 		}
 
 		if (coll.collider.name == "R_lvl1") {
+			
+			if (Blue.activeSelf == true) {
+				GameObject Spark2 = Instantiate (SparkBlue) as GameObject;
+				Spark2.transform.position = coll.contacts [0].point;
+			}
 
-			GameObject Spark2 = Instantiate (SparkBlue) as GameObject;
-			Spark2.transform.position = coll.contacts [0].point;
-
+				if (Orange.activeSelf == true) {
+					GameObject Spark1 = Instantiate (SparkOrange) as GameObject;
+					Spark1.transform.position = coll.contacts [0].point;
+			}
 
 			if (GetComponent<Rigidbody2D> ().velocity.magnitude > 20) {
 				GetComponent<Rigidbody2D> ().velocity *= 0.66f;
@@ -413,7 +429,8 @@ public class BallControl : MonoBehaviour
 
 			if (GetComponent<Rigidbody2D> ().velocity != Vector2.zero) {
 				KortPause = GetComponent<Rigidbody2D> ().velocity;
-			}			StartCoroutine (Kunstnerpause3 ());
+			}			
+			row3thing ();
 
 		}
 
@@ -430,7 +447,7 @@ public class BallControl : MonoBehaviour
 			if (GetComponent<Rigidbody2D> ().velocity != Vector2.zero) {
 				KortPause = GetComponent<Rigidbody2D> ().velocity;
 			}
-			StartCoroutine (Kunstnerpause3 ());
+			row3thing ();
 		}
 
 		if (coll.collider.name == "R_lvl4") {
@@ -509,7 +526,7 @@ public class BallControl : MonoBehaviour
 
 		Vector2 beforeslow = GetComponent<Rigidbody2D> ().velocity;
 		GetComponent<Rigidbody2D> ().velocity =  beforeslow*0.1f;
-		yield return new WaitForSeconds (0.7f);
+		yield return new WaitForSeconds (0.3f);
 		Time.timeScale = 1;
 		GetComponent<Rigidbody2D> ().velocity = beforeslow;
 
@@ -524,7 +541,7 @@ public class BallControl : MonoBehaviour
 
 		Vector2 beforeslow = GetComponent<Rigidbody2D> ().velocity;
 		GetComponent<Rigidbody2D> ().velocity =  beforeslow*0.1f;
-		yield return new WaitForSeconds (1f);
+		yield return new WaitForSeconds (0.5f);
 		Time.timeScale = 1;
 		GetComponent<Rigidbody2D> ().velocity = beforeslow;
 
