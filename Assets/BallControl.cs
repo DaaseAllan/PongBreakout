@@ -145,6 +145,7 @@ public class BallControl : MonoBehaviour
 			}
 		}
 
+		Spawnmanager.ResetManager();
 
 		print ("BALL HAS BEEN RESET");
 
