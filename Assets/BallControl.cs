@@ -67,7 +67,12 @@ public class BallControl : MonoBehaviour
 	{
 		
 		print (GetComponent<Rigidbody2D> ().velocity.magnitude);
-	
+
+		if (GetComponent<Rigidbody2D> ().velocity.magnitude < 5 && Time.timeScale == 1) 
+		{
+			GetComponent<Rigidbody2D> ().velocity = new Vector2(GetComponent<Rigidbody2D> ().velocity.x * 1.25f, GetComponent<Rigidbody2D> ().velocity.y * 1.25f);
+			print ("fukker langsomt mere gas");
+		}
 	
 	}
 
@@ -282,7 +287,7 @@ public class BallControl : MonoBehaviour
 
 		print (coll.collider.name);
 
-		if (GetComponent<Rigidbody2D> ().velocity.magnitude < 5 && Time.timeScale > 1) 
+		if (GetComponent<Rigidbody2D> ().velocity.magnitude < 5 && Time.timeScale == 1) 
 		{
 			GetComponent<Rigidbody2D> ().velocity = new Vector2(GetComponent<Rigidbody2D> ().velocity.x * 1.25f, GetComponent<Rigidbody2D> ().velocity.y * 1.25f);
 		}
@@ -297,7 +302,7 @@ public class BallControl : MonoBehaviour
 				GetComponent<Rigidbody2D> ().velocity *= 1.2f;
 			}
 
-			if (LastY == GetComponent<Rigidbody2D> ().transform.position.y) {
+			if ( GetComponent<Rigidbody2D> ().transform.position.y > LastY - 0.2f && GetComponent<Rigidbody2D> ().transform.position.y < LastY + 0.2f ) {
 				HitInRow += 1;
 				print ("LASTYVIRKER");
 				print (HitInRow);
@@ -305,8 +310,8 @@ public class BallControl : MonoBehaviour
 				HitInRow = 0;
 
 			}
-
-			if (HitInRow > 1) {
+			//HitInRow
+			if (HitInRow > 2) {
 				if (GetComponent<Rigidbody2D> ().transform.position.y > 0) {
 					GetComponent<Rigidbody2D> ().AddForce (Vector2.down * 20);
 					GetComponent<Rigidbody2D> ().velocity *= 0.75f;
