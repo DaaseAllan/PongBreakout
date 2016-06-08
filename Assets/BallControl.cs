@@ -19,6 +19,11 @@ public class BallControl : MonoBehaviour
 	public GameObject Player2;
 	public Spawnmanager Spawnmanager;
 
+	public enum Ballstate { HasNotTouchedAnything,LeftTouched,RightTouched };
+
+	private Ballstate LastTouched;
+
+
 	public float twofast4game;
 
 	private Vector2 KortPause;
@@ -109,6 +114,7 @@ public class BallControl : MonoBehaviour
 	{
 
 		Spawnmanager.ResetManager();
+		LastTouched = Ballstate.HasNotTouchedAnything;
 
 		GetComponent<CamShakeSimple> ().enableshake = false;
 		Row1 = false;
@@ -281,9 +287,23 @@ public class BallControl : MonoBehaviour
 
 	}
 
+	public void BallBackChecker(bool SLowOn) {
+		Vector2 beforeslow = GetComponent<Rigidbody2D> ().velocity;
+		if (SLowOn == true) {
+			Time.timeScale = 0.25f;
+
+			GetComponent<Rigidbody2D> ().velocity =  beforeslow*0.1f;
+		} else {
+			Time.timeScale = 1;
+			GetComponent<Rigidbody2D> ().velocity = beforeslow;
+		}
+	}
+
 	void OnCollisionEnter2D (Collision2D coll)
 
 	{
+
+
 
 		print (coll.collider.name);
 
@@ -332,7 +352,7 @@ public class BallControl : MonoBehaviour
 
 
 			if (coll.collider.name == ("Player1")) {
-
+				LastTouched = Ballstate.HasNotTouchedAnything;
 				LastPlayer = 1;
 				Orange.GetComponent<TrailRenderer> ().time = 1;
 				Blue.GetComponent<TrailRenderer> ().time = 0;
@@ -344,7 +364,7 @@ public class BallControl : MonoBehaviour
 			}
 		
 			if (coll.collider.name == ("Player2")) {
-
+				LastTouched = Ballstate.HasNotTouchedAnything;
 				LastPlayer = 2;
 				Orange.GetComponent<TrailRenderer> ().time = 0;
 				Blue.GetComponent<TrailRenderer> ().time = 1;
@@ -381,7 +401,7 @@ public class BallControl : MonoBehaviour
 		}
 
 		if (coll.collider.name == "R_lvl1") {
-			
+			LastTouched = Ballstate.RightTouched;
 			if (LastPlayer == 2) {
 				GameObject Spark2 = Instantiate (SparkBlue) as GameObject;
 				Spark2.transform.position = coll.contacts [0].point;
@@ -407,7 +427,7 @@ public class BallControl : MonoBehaviour
 
 
 		if (coll.collider.name == "L_lvl1") {
-
+			LastTouched = Ballstate.LeftTouched;
 			if (LastPlayer == 2) {
 				GameObject Spark2 = Instantiate (SparkBlue) as GameObject;
 				Spark2.transform.position = coll.contacts [0].point;
@@ -429,7 +449,7 @@ public class BallControl : MonoBehaviour
 		}
 
 		if (coll.collider.name == "R_lvl2") {
-
+			LastTouched = Ballstate.RightTouched;
 				if (LastPlayer == 2) {
 					GameObject Spark2 = Instantiate (SparkBlue) as GameObject;
 					Spark2.transform.position = coll.contacts [0].point;
@@ -453,7 +473,7 @@ public class BallControl : MonoBehaviour
 
 
 		if (coll.collider.name == "L_lvl2") {
-
+			LastTouched = Ballstate.LeftTouched;
 					if (LastPlayer == 2) {
 						GameObject Spark2 = Instantiate (SparkBlue) as GameObject;
 						Spark2.transform.position = coll.contacts [0].point;
@@ -475,7 +495,7 @@ public class BallControl : MonoBehaviour
 		}
 
 		if (coll.collider.name == "R_lvl3") {
-
+			LastTouched = Ballstate.RightTouched;
 						if (LastPlayer == 2) {
 							GameObject Spark2 = Instantiate (SparkBlue) as GameObject;
 							Spark2.transform.position = coll.contacts [0].point;
@@ -500,7 +520,7 @@ public class BallControl : MonoBehaviour
 
 
 		if (coll.collider.name == "L_lvl3") {
-
+			LastTouched = Ballstate.LeftTouched;
 							if (LastPlayer == 2) {
 								GameObject Spark2 = Instantiate (SparkBlue) as GameObject;
 								Spark2.transform.position = coll.contacts [0].point;
@@ -521,7 +541,7 @@ public class BallControl : MonoBehaviour
 		}
 
 		if (coll.collider.name == "R_lvl4") {
-
+			LastTouched = Ballstate.RightTouched;
 								if (LastPlayer == 2) {
 									GameObject Spark2 = Instantiate (SparkBlue) as GameObject;
 									Spark2.transform.position = coll.contacts [0].point;
@@ -546,7 +566,7 @@ public class BallControl : MonoBehaviour
 
 
 		if (coll.collider.name == "L_lvl4") {
-
+			LastTouched = Ballstate.LeftTouched;
 									if (LastPlayer == 2) {
 										GameObject Spark2 = Instantiate (SparkBlue) as GameObject;
 										Spark2.transform.position = coll.contacts [0].point;
