@@ -292,7 +292,18 @@ public class BallControl : MonoBehaviour
 		print ("pfff et eller andet is on" + SlowOn);
 	//	Vector2 beforeslow = GetComponent<Rigidbody2D> ().velocity;
 		if (SlowOn == true) {
-			Time.timeScale = 0.25f;
+
+			print ("Der skal slowes, lasttouched = " + LastTouched + " og min x = " + transform.position.x);
+			if (LastTouched == Ballstate.LeftTouched && transform.position.x < 0) {
+				Time.timeScale = 0.1f;
+			}
+			else if (LastTouched == Ballstate.RightTouched && transform.position.x > 0) {
+				Time.timeScale = 0.1f;
+			} else
+			{
+
+				Time.timeScale = 1;
+			}
 
 		//	GetComponent<Rigidbody2D> ().velocity =  beforeslow*0.1f;
 		} else {
@@ -385,6 +396,8 @@ public class BallControl : MonoBehaviour
 			
 		//BLOCKS
 		if (coll.collider.CompareTag ("Block")) {
+
+
 
 			GameObject trekanter = Instantiate (Trekantexp) as GameObject;
 			trekanter.transform.position = coll.contacts [0].point;
@@ -588,6 +601,8 @@ public class BallControl : MonoBehaviour
 			}		//	StartCoroutine (Kunstnerpause4 ());
 
 		}
+
+		print (LastTouched);
 
 		
 

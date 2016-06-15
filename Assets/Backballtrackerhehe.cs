@@ -9,7 +9,7 @@ public class Backballtrackerhehe : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void OnTriggerEnter2D (Collider2D BackCollider) {
+	void OnTriggerStay2D (Collider2D BackCollider) {
 	
 		if (BackCollider.tag == "Ball") {
 			BackCollider.GetComponent<BallControl> ().BallBackChecker (true);
@@ -20,6 +20,6 @@ public class Backballtrackerhehe : MonoBehaviour {
 
 		if (BackCollider.tag == "Ball") {
 			BackCollider.GetComponent<BallControl> ().BallBackChecker (false);
-		}
+	}
 	}
 }
