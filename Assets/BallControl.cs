@@ -244,7 +244,7 @@ public class BallControl : MonoBehaviour
 			White.GetComponent<TrailRenderer> ().enabled = true;
 			GetComponent<CamShakeSimple> ().enableshake = true;
 			Spawnmanager.RunAgain ();
-			StartCoroutine (Kunstnerpause1 ());
+		//	StartCoroutine (Kunstnerpause1 ());
 		
 		}
 			
@@ -254,7 +254,7 @@ public class BallControl : MonoBehaviour
 	{
 		if (Row2 == false) {
 			Row2 = true;
-			StartCoroutine (Kunstnerpause2 ());
+		//	StartCoroutine (Kunstnerpause2 ());
 		}
 	}
 
@@ -262,7 +262,7 @@ public class BallControl : MonoBehaviour
 	{
 		if (Row3 == false) {
 			Row3 = true;
-			StartCoroutine (Kunstnerpause3 ());
+		//	StartCoroutine (Kunstnerpause3 ());
 		}
 	}
 
@@ -287,15 +287,17 @@ public class BallControl : MonoBehaviour
 
 	}
 
-	public void BallBackChecker(bool SLowOn) {
-		Vector2 beforeslow = GetComponent<Rigidbody2D> ().velocity;
-		if (SLowOn == true) {
+	public void BallBackChecker(bool SlowOn) {
+
+		print ("pfff et eller andet is on" + SlowOn);
+	//	Vector2 beforeslow = GetComponent<Rigidbody2D> ().velocity;
+		if (SlowOn == true) {
 			Time.timeScale = 0.25f;
 
-			GetComponent<Rigidbody2D> ().velocity =  beforeslow*0.1f;
+		//	GetComponent<Rigidbody2D> ().velocity =  beforeslow*0.1f;
 		} else {
 			Time.timeScale = 1;
-			GetComponent<Rigidbody2D> ().velocity = beforeslow;
+		//	GetComponent<Rigidbody2D> ().velocity = beforeslow;
 		}
 	}
 
@@ -559,7 +561,7 @@ public class BallControl : MonoBehaviour
 			if (GetComponent<Rigidbody2D> ().velocity != Vector2.zero) {
 				KortPause = GetComponent<Rigidbody2D> ().velocity;
 			}
-			StartCoroutine (Kunstnerpause4 ());
+		//	StartCoroutine (Kunstnerpause4 ());
 
 		}
 
@@ -583,7 +585,7 @@ public class BallControl : MonoBehaviour
 
 			if (GetComponent<Rigidbody2D> ().velocity != Vector2.zero) {
 				KortPause = GetComponent<Rigidbody2D> ().velocity;
-			}			StartCoroutine (Kunstnerpause4 ());
+			}		//	StartCoroutine (Kunstnerpause4 ());
 
 		}
 
