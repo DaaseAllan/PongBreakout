@@ -294,20 +294,37 @@ public class BallControl : MonoBehaviour
 		if (SlowOn == true) {
 
 			print ("Der skal slowes, lasttouched = " + LastTouched + " og min x = " + transform.position.x);
+
+
+			float boldprocent = GetComponent<Rigidbody2D> ().velocity.magnitude / 40;
+
+			float speedslow = boldprocent * 50000;
+
+
 			if (LastTouched == Ballstate.LeftTouched && transform.position.x < 0) {
-				Time.timeScale = 0.1f;
+				Time.timeScale = 0.05f;
+				Time.fixedDeltaTime = 0.02f * Time.timeScale;
+				Player2.GetComponent<Player2Control> ().speed = speedslow;
 			}
 			else if (LastTouched == Ballstate.RightTouched && transform.position.x > 0) {
-				Time.timeScale = 0.1f;
+				Time.timeScale = 0.05f;
+				Time.fixedDeltaTime = 0.02f * Time.timeScale;
+					Player1.GetComponent<Player1Control> ().speed = speedslow;
+
 			} else
 			{
-
+				Player1.GetComponent<Player1Control> ().speed = 500f;
+				Player2.GetComponent<Player2Control> ().speed = 500f;
 				Time.timeScale = 1;
+				Time.fixedDeltaTime = 0.02f ;
 			}
 
 		//	GetComponent<Rigidbody2D> ().velocity =  beforeslow*0.1f;
 		} else {
+			Player1.GetComponent<Player1Control> ().speed = 500f;
+			Player2.GetComponent<Player2Control> ().speed = 500f;
 			Time.timeScale = 1;
+			Time.fixedDeltaTime = 0.02f ;
 		//	GetComponent<Rigidbody2D> ().velocity = beforeslow;
 		}
 	}
