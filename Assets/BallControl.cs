@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class BallControl : MonoBehaviour
 {
@@ -18,6 +19,15 @@ public class BallControl : MonoBehaviour
 	public GameObject Player1;
 	public GameObject Player2;
 	public Spawnmanager Spawnmanager;
+
+	public Image Player1Bobbel1;
+	public Image Player1Bobbel2;
+	public Image Player2Bobbel1;
+	public Image Player2Bobbel2;
+
+	public Sprite OrangeScore;
+	public Sprite BlåScore;
+	public Sprite NeutralScore;
 
 	public enum Ballstate { HasNotTouchedAnything,LeftTouched,RightTouched };
 
@@ -70,7 +80,39 @@ public class BallControl : MonoBehaviour
 
 	void Update ()
 	{
-		
+
+		if (GameManager.PlayerScore1 == 1) {
+			Player2Bobbel1.sprite = BlåScore;
+		}
+			
+		if (GameManager.PlayerScore1 == 2) {
+			Player2Bobbel2.sprite = BlåScore;
+		}
+
+		if (GameManager.PlayerScore2 == 1) {
+			Player1Bobbel1.sprite = OrangeScore;
+		}
+
+		if (GameManager.PlayerScore2 == 2) {
+			Player1Bobbel2.sprite = OrangeScore;
+		}
+
+
+		if (GameManager.PlayerScore1 == 0) {
+			Player2Bobbel1.sprite = NeutralScore;
+			Player2Bobbel2.sprite = NeutralScore;
+		}
+
+		if (GameManager.PlayerScore2 == 0) {
+			Player1Bobbel1.sprite = NeutralScore;
+			Player1Bobbel2.sprite = NeutralScore;
+		}
+			
+
+	
+	//	GameManager.PlayerScore1++;
+
+
 		print (GetComponent<Rigidbody2D> ().velocity.magnitude);
 
 		if (GetComponent<Rigidbody2D> ().velocity.magnitude < 5 && Time.timeScale == 1) 
@@ -108,6 +150,12 @@ public class BallControl : MonoBehaviour
 		GetComponent<Rigidbody2D> ().velocity = vel;
 
 		gameObject.transform.position = new Vector2 (0, 0);
+	}
+
+	public void resetGame(){
+		resetBall ();
+		GameManager.PlayerScore1 = 0;
+		GameManager.PlayerScore2 = 0;
 	}
 
 	public void resetBall ()

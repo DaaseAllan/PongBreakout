@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour {
 		if (wallID == "rightWall") {
 			print ("player1" + wallID);
 			PlayerScore1++;
+
 		} else {
 			print("player2" + wallID);
 			PlayerScore2++;
@@ -43,10 +44,10 @@ public class GameManager : MonoBehaviour {
 			theBall.gameObject.SendMessage ("resetBall", .5f, SendMessageOptions.RequireReceiver);
 		}
 
-		if (PlayerScore1 == 10) {
+		if (PlayerScore1 == 2) {
 			GUI.Label (new Rect (Screen.width /	2 - 150, 200, 2000, 1000), "PLAYER 1 WINS");
 			theBall.gameObject.SendMessage ("hasWon", null, SendMessageOptions.RequireReceiver);
-		} else if (PlayerScore2 == 10) {
+		} else if (PlayerScore2 == 2) {
 			GUI.Label (new Rect (Screen.width /	2 - 150, 200, 2000, 1000), "PLAYER 2 WINS");
 			theBall.gameObject.SendMessage ("hasWon", null, SendMessageOptions.RequireReceiver);
 

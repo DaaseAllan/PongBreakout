@@ -10,6 +10,7 @@ public class SideWalls : MonoBehaviour {
 			GameManager.Score (wallName);
 			hitInfo.gameObject.GetComponent<BallControl> ().resetBall ();
 			Debug.Log("halløj");
+		
 		}
 	
 	}
