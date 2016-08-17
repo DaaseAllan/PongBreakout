@@ -18,6 +18,8 @@ public class BallControl : MonoBehaviour
 	public GameObject Trekantexp;
 	public GameObject Player1;
 	public GameObject Player2;
+	public GameObject Player1wins;
+	public GameObject Player2wins;
 	public Spawnmanager Spawnmanager;
 
 	public Image Player1Bobbel1;
@@ -156,6 +158,9 @@ public class BallControl : MonoBehaviour
 		resetBall ();
 		GameManager.PlayerScore1 = 0;
 		GameManager.PlayerScore2 = 0;
+		Player1wins.SetActive (false);
+		Player2wins.SetActive (false);
+
 	}
 
 	public void resetBall ()
