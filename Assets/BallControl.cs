@@ -115,7 +115,7 @@ public class BallControl : MonoBehaviour
 	//	GameManager.PlayerScore1++;
 
 
-		print (GetComponent<Rigidbody2D> ().velocity.magnitude);
+//		print (GetComponent<Rigidbody2D> ().velocity.magnitude);
 
 		if (GetComponent<Rigidbody2D> ().velocity.magnitude < 5 && Time.timeScale == 1) 
 		{
@@ -142,8 +142,9 @@ public class BallControl : MonoBehaviour
 		}
 	}
 
-	void hasWon ()
+	public void hasWon1 ()
 	{
+		print ("hasWon1");
 
 
 		var vel = GetComponent<Rigidbody2D> ().velocity;
@@ -152,9 +153,68 @@ public class BallControl : MonoBehaviour
 		GetComponent<Rigidbody2D> ().velocity = vel;
 
 		gameObject.transform.position = new Vector2 (0, 0);
+		StartCoroutine (Breakalltheshizzle (1));
+	
+	}
+
+	public void hasWon2 ()
+	{
+		print ("hasWon2");
+
+
+		var vel = GetComponent<Rigidbody2D> ().velocity;
+		vel.y = 0;
+		vel.x = 0;
+		GetComponent<Rigidbody2D> ().velocity = vel;
+
+		gameObject.transform.position = new Vector2 (0, 0);
+		StartCoroutine (Breakalltheshizzle (2));
+	}
+
+	IEnumerator Breakalltheshizzle (int thewinner)
+	{
+		print (thewinner + " is da number");
+
+		if (thewinner == 1) {
+			foreach (Transform T in RB) {
+				GameObject blocktmp = Instantiate (Trekantexp) as GameObject;
+				blocktmp.transform.position = T.position;
+				GameObject Spark1 = Instantiate (SparkBlue) as GameObject;
+				Spark1.transform.position = T.position;
+				if(T.GetComponent<Renderer>() != null)
+				{
+				T.GetComponent<Renderer> ().enabled = false; 
+				}
+				Destroy (blocktmp, 2.9f);
+
+				GetComponent<CamShakeSimple> ().CameraShake ();
+				yield return new WaitForSeconds (0.03f);
+			}
+
+		}
+		if (thewinner == 2) {
+			foreach (Transform T in LB) {
+				GameObject blocktmp = Instantiate (Trekantexp) as GameObject;
+				blocktmp.transform.position = T.position;
+				GameObject Spark2 = Instantiate (SparkOrange) as GameObject;
+				Spark2.transform.position = T.position;
+				if(T.GetComponent<Renderer>() != null)
+				{
+					T.GetComponent<Renderer> ().enabled = false; 
+				}
+				Destroy (blocktmp, 2.9f);
+				GetComponent<CamShakeSimple> ().CameraShake ();
+				yield return new WaitForSeconds (0.03f);
+			}
+
+		}
+
+		yield return new WaitForSeconds (5f);
+		resetGame ();
 	}
 
 	public void resetGame(){
+//  til button
 		resetBall ();
 		GameManager.PlayerScore1 = 0;
 		GameManager.PlayerScore2 = 0;
@@ -346,7 +406,7 @@ public class BallControl : MonoBehaviour
 	//	Vector2 beforeslow = GetComponent<Rigidbody2D> ().velocity;
 		if (SlowOn == true) {
 
-			print ("Der skal slowes, lasttouched = " + LastTouched + " og min x = " + transform.position.x);
+//			print ("Der skal slowes, lasttouched = " + LastTouched + " og min x = " + transform.position.x);
 
 
 			float boldprocent = GetComponent<Rigidbody2D> ().velocity.magnitude / 40;
@@ -407,8 +467,8 @@ public class BallControl : MonoBehaviour
 
 			if ( GetComponent<Rigidbody2D> ().transform.position.y > LastY - 0.2f && GetComponent<Rigidbody2D> ().transform.position.y < LastY + 0.2f ) {
 				HitInRow += 1;
-				print ("LASTYVIRKER");
-				print (HitInRow);
+		//		print ("LASTYVIRKER");
+		//		print (HitInRow);
 			} else {
 				HitInRow = 0;
 

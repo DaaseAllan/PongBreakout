@@ -8,7 +8,14 @@ public class SideWalls : MonoBehaviour {
 		if (hitInfo.name == "Ball") {
 			string wallName = transform.name;
 			GameManager.Score (wallName);
-			hitInfo.gameObject.GetComponent<BallControl> ().resetBall ();
+			if ((GameManager.PlayerScore1 == 2 || GameManager.PlayerScore2 == 2)) {
+
+				print ("vi gør ikke noget hilsen walls");
+			} 
+			else {
+				hitInfo.gameObject.GetComponent<BallControl> ().resetBall ();
+			}
+	
 			Debug.Log("halløj");
 		
 		}

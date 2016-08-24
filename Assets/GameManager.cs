@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour {
 
 
 
-	void OnGUI(){
+	void Update(){
 	/*	GUI.skin = layout;
 		Rect r1 = new Rect (Screen.width / 2 - 150 - 12, 20, 100, 100);
 		string s1 = "" + PlayerScore1;
@@ -49,11 +49,13 @@ public class GameManager : MonoBehaviour {
 		if (PlayerScore1 == 2) {
 			//GUI.Label (new Rect (Screen.width /	2 - 150, 200, 2000, 1000), "PLAYER 1 WINS");
 			Player1wins.SetActive(true);
-			theBall.gameObject.SendMessage ("hasWon", null, SendMessageOptions.RequireReceiver);
+			theBall.gameObject.GetComponent<BallControl> ().hasWon1 ();
+			PlayerScore1 = 0;
 		} else if (PlayerScore2 == 2) {
 			Player2wins.SetActive(true);
 			//GUI.Label (new Rect (Screen.width /	2 - 150, 200, 2000, 1000), "PLAYER 2 WINS");
-			theBall.gameObject.SendMessage ("hasWon", null, SendMessageOptions.RequireReceiver);
+		PlayerScore2 = 0;
+		theBall.gameObject.GetComponent<BallControl> ().hasWon2 ();
 
 
 

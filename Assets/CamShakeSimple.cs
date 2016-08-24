@@ -25,7 +25,7 @@ public class CamShakeSimple : MonoBehaviour
 		}
 	}
 
-	void CameraShake()
+	public void CameraShake()
 	{
 		if(shakeAmt>0) 
 		{
