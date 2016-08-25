@@ -3,8 +3,13 @@ using System.Collections;
 
 public class AudioMuffle : MonoBehaviour {
 
-	void Slowmosound (){
+	public void Slowmosound (){
 
 			GetComponent<AudioLowPassFilter> ().enabled = true;
 }
+
+	public void Slowmosoundoff (){
+
+		GetComponent<AudioLowPassFilter> ().enabled = false;
+	}
 	}

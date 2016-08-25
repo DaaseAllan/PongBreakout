@@ -90,7 +90,9 @@ public class BallControl : MonoBehaviour
 	{
 
 		if (Time.timeScale < 1) {
-			theCamera.gameObject.GetComponent<AudioMuffle>.Slowmosound ();
+			theCamera.GetComponent<AudioMuffle> ().Slowmosound ();
+		} else {
+			theCamera.GetComponent<AudioMuffle> ().Slowmosoundoff ();
 		}
 
 		if (GameManager.PlayerScore1 == 1) {
