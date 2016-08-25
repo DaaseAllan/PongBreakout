@@ -209,8 +209,8 @@ public class BallControl : MonoBehaviour
 
 		}
 
-		yield return new WaitForSeconds (5f);
-		resetGame ();
+	//	yield return new WaitForSeconds (5f);
+	//	resetGame ();
 	}
 
 	public void resetGame(){
