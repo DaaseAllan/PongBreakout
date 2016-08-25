@@ -21,6 +21,7 @@ public class BallControl : MonoBehaviour
 	public GameObject Player1wins;
 	public GameObject Player2wins;
 	public Spawnmanager Spawnmanager;
+	public Camera theCamera;
 
 	public Image Player1Bobbel1;
 	public Image Player1Bobbel2;
@@ -32,6 +33,7 @@ public class BallControl : MonoBehaviour
 	public Sprite NeutralScore;
 
 	public AudioClip Playerhit;
+	public AudioClip Blockhit;
 
 	public enum Ballstate { HasNotTouchedAnything,LeftTouched,RightTouched };
 
@@ -74,6 +76,8 @@ public class BallControl : MonoBehaviour
 		LB = LeftBlocks.GetComponentsInChildren<Transform> ();
 
 		RB = RightBlocks.GetComponentsInChildren<Transform> ();
+
+	//	theCamera = GameObject.FindGameObjectWithTag ("MainCamera").transform;
 	}
 
 	IEnumerator hi (float secs)
@@ -84,6 +88,10 @@ public class BallControl : MonoBehaviour
 
 	void Update ()
 	{
+
+		if (Time.timeScale < 1) {
+			theCamera.gameObject.GetComponent<AudioMuffle>.Slowmosound ();
+		}
 
 		if (GameManager.PlayerScore1 == 1) {
 			Player2Bobbel1.sprite = BlåScore;
@@ -118,6 +126,9 @@ public class BallControl : MonoBehaviour
 
 
 //		print (GetComponent<Rigidbody2D> ().velocity.magnitude);
+
+		if (Time.timeScale < 1) {
+		}
 
 		if (GetComponent<Rigidbody2D> ().velocity.magnitude < 5 && Time.timeScale == 1) 
 		{
@@ -188,7 +199,7 @@ public class BallControl : MonoBehaviour
 				T.GetComponent<Renderer> ().enabled = false; 
 				}
 				Destroy (blocktmp, 2.9f);
-
+				GetComponent<AudioSource> ().PlayOneShot (Blockhit);
 				GetComponent<CamShakeSimple> ().CameraShake ();
 				yield return new WaitForSeconds (0.03f);
 			}
@@ -205,6 +216,7 @@ public class BallControl : MonoBehaviour
 					T.GetComponent<Renderer> ().enabled = false; 
 				}
 				Destroy (blocktmp, 2.9f);
+				GetComponent<AudioSource> ().PlayOneShot (Blockhit);
 				GetComponent<CamShakeSimple> ().CameraShake ();
 				yield return new WaitForSeconds (0.03f);
 			}
@@ -532,7 +544,7 @@ public class BallControl : MonoBehaviour
 		if (coll.collider.CompareTag ("Block")) {
 
 
-
+			GetComponent<AudioSource> ().PlayOneShot (Blockhit);
 			GameObject trekanter = Instantiate (Trekantexp) as GameObject;
 			trekanter.transform.position = coll.contacts [0].point;
 			Destroy (trekanter, 2.9f);
