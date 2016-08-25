@@ -31,6 +31,8 @@ public class BallControl : MonoBehaviour
 	public Sprite BlåScore;
 	public Sprite NeutralScore;
 
+	public AudioClip Playerhit;
+
 	public enum Ballstate { HasNotTouchedAnything,LeftTouched,RightTouched };
 
 	private Ballstate LastTouched;
@@ -456,6 +458,8 @@ public class BallControl : MonoBehaviour
 		}
 
 		if (coll.collider.CompareTag ("Player")) {
+			GetComponent<AudioSource> ().PlayOneShot (Playerhit);
+			print ("lortet er fucked");
 			var velY = GetComponent<Rigidbody2D> ().velocity.y;
 			var velX = GetComponent<Rigidbody2D> ().velocity.x;
 			velY = (velY / 2.0f) + (coll.collider.GetComponent<Rigidbody2D> ().velocity.y / 3.0f);
