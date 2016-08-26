@@ -8,6 +8,7 @@ public class Player2Control : MonoBehaviour {
 	public float speed = 10.0f;
 	public string SavedPowerup;
 	private Vector3 Player2startscale;
+	public GameObject powerupready;
 
 	void Start () {
 
@@ -44,6 +45,12 @@ public class Player2Control : MonoBehaviour {
 		}
 
 		GetComponent<Rigidbody2D> ().velocity = vel;
+
+		if (SavedPowerup == "PowerupLarge") {
+			powerupready.SetActive (true);
+		} else {
+			powerupready.SetActive (false);
+		}
 
 	}
 

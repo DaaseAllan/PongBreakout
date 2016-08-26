@@ -7,6 +7,8 @@ public class Player1Control : MonoBehaviour {
 	public KeyCode moveDown = KeyCode.DownArrow;
 	public float speed = 10.0f;
 	public string SavedPowerup;
+	public GameObject powerupready;
+
 
 	private Vector3 Player1startscale;
 
@@ -47,6 +49,11 @@ public class Player1Control : MonoBehaviour {
 
 		GetComponent<Rigidbody2D> ().velocity = vel;
 
+		if (SavedPowerup == "PowerupLarge") {
+			powerupready.SetActive (true);
+		} else {
+			powerupready.SetActive (false);
+		}
 	}
 
 	IEnumerator PUscale ()
