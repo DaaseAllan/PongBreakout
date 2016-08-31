@@ -236,6 +236,8 @@ public class BallControl : MonoBehaviour
 		GameManager.PlayerScore2 = 0;
 		Player1wins.SetActive (false);
 		Player2wins.SetActive (false);
+		Player1.GetComponent<Player1Control> ().SavedPowerup = "";
+		Player2.GetComponent<Player2Control> ().SavedPowerup = "";
 
 	}
 
